@@ -1,0 +1,11 @@
+python-dotenv>=1.0.0
+earth2studio>=0.3.0
+numpy>=1.24
+xarray>=2023.7
+zarr>=2.17
+s3fs>=2023.1
+fsspec>=2023.1
+matplotlib>=3.7
+cartopy>=0.22
+torch>=2.1
+

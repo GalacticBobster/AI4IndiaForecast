@@ -1,0 +1,33 @@
+name: Daily Earth2Studio Inference
+
+on:
+  schedule:
+    # Runs every day at 4pm EST (21:00 UTC)
+    - cron: "0 21 * * *"
+  workflow_dispatch: # allows manual trigger
+
+jobs:
+  run-inference:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run daily Earth2Studio script
+        env:
+          NOAA_KEY: ${{ secrets.NOAA_KEY }}
+          OTHER_ENV: ${{ secrets.OTHER_ENV }}
+        run: |
+          python scripts/daily_inference.py
+
