@@ -11,6 +11,7 @@ import earth2studio.run as run
 import cartopy.crs as ccrs
 import matplotlib.pyplot as plt
 import numpy as np
+import os
 
 def round_to_gfs(dt):
     hour = (dt.hour // 6) * 6
@@ -66,8 +67,9 @@ def main():
     #cbar.set_clim(-10.0, 30)
     cbar = fig.colorbar(cbar, ax=ax[-1], orientation="vertical", label="K", shrink=0.8)
 
-
-    plt.savefig("../docs/outputs/latest_forecast.png")
+    output_dir = "../docs/outputs"
+    os.makedirs(output_dir, exist_ok=True)
+    plt.savefig(os.path.join(output_dir, "latest_forecast.png"))
 
 
 if __name__ == "__main__":
