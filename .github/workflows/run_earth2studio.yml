@@ -39,8 +39,10 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           mkdir -p docs/outputs/   # make sure folder exists
-          git add docs/outputs/
-          git commit -m "Update daily forecast" || echo "No changes to commit"
-          git push
+          git add docs/outputs/*
+          git diff --quiet || git commit -m "Update daily forecast"
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
+
+
 
 
