@@ -38,7 +38,7 @@ def main():
     1,
     5,
     figsize=(12, 4),
-    subplot_kw={"projection": ccrs.Orthographic()},
+    subplot_kw={"projection": ccrs.Orthographic(central_longitude=78, central_latitude=23)},
     constrained_layout=True,
     )
     vmin = np.nanmin(io[variable])
@@ -67,7 +67,7 @@ def main():
     #cbar.set_clim(-10.0, 30)
     cbar = fig.colorbar(cbar, ax=ax[-1], orientation="vertical", label="K", shrink=0.8)
 
-    output_dir = "../docs/outputs"
+    output_dir = "docs/outputs"
     os.makedirs(output_dir, exist_ok=True)
     plt.savefig(os.path.join(output_dir, "latest_forecast.png"))
 

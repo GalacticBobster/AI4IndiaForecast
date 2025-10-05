@@ -39,9 +39,13 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           mkdir -p docs/outputs/   # make sure folder exists
-          git add docs/outputs/*
-          git diff --quiet || git commit -m "Update daily forecast"
-          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
+          if compgen -G "docs/outputs/*" > /dev/null; then
+            git add docs/outputs/*
+            git diff --quiet || git commit -m "Update daily forecast"
+            git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
+          else
+            echo "No files to commit"
+          fi
 
 
 
