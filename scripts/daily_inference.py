@@ -67,7 +67,7 @@ def main():
     cbar = fig.colorbar(cbar, ax=ax[-1], orientation="vertical", label="K", shrink=0.8)
 
 
-    plt.savefig("outputs/latest_forecast.png")
+    plt.savefig("../docs/outputs/latest_forecast.png")
 
 
 if __name__ == "__main__":
