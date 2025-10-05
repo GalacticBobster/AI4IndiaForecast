@@ -1,2 +1,2 @@
 # AI4IndiaForecast
-AI Emulator based Daily Weather Forecast for India
+Daily Weather Forecast for Indian subcontinent based on AI emulators through NVIDIA Earth2Studio
