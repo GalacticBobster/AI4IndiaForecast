@@ -1,0 +1,32 @@
+ 08-10-2025 10:07:26:15 [pid=94810 tid=94810] ERROR  cufio_core:977 cuInit Failed, error CUDA_ERROR_NO_DEVICE
+ 08-10-2025 10:07:26:15 [pid=94810 tid=94810] ERROR  cufio_core:1097 cuFile initialization failed
+ 08-10-2025 10:09:14:505 [pid=125264 tid=125264] ERROR  cufio_core:977 cuInit Failed, error CUDA_ERROR_NO_DEVICE
+ 08-10-2025 10:09:14:506 [pid=125264 tid=125264] ERROR  cufio_core:1097 cuFile initialization failed
+ 08-10-2025 10:09:57:418 [pid=1899 tid=1899] ERROR  cufio_core:977 cuInit Failed, error CUDA_ERROR_NO_DEVICE
+ 08-10-2025 10:09:57:418 [pid=1899 tid=1899] ERROR  cufio_core:1097 cuFile initialization failed
+ 08-10-2025 10:10:51:656 [pid=11496 tid=11496] ERROR  cufio_core:977 cuInit Failed, error CUDA_ERROR_NO_DEVICE
+ 08-10-2025 10:10:51:656 [pid=11496 tid=11496] ERROR  cufio_core:1097 cuFile initialization failed
+ 08-10-2025 10:11:43:115 [pid=19620 tid=19620] ERROR  cufio_core:977 cuInit Failed, error CUDA_ERROR_NO_DEVICE
+ 08-10-2025 10:11:43:115 [pid=19620 tid=19620] ERROR  cufio_core:1097 cuFile initialization failed
+ 08-10-2025 10:12:17:350 [pid=25055 tid=25055] ERROR  cufio_core:977 cuInit Failed, error CUDA_ERROR_NO_DEVICE
+ 08-10-2025 10:12:17:350 [pid=25055 tid=25055] ERROR  cufio_core:1097 cuFile initialization failed
+ 08-10-2025 10:12:57:986 [pid=32039 tid=32039] ERROR  cufio_core:977 cuInit Failed, error CUDA_ERROR_NO_DEVICE
+ 08-10-2025 10:12:57:986 [pid=32039 tid=32039] ERROR  cufio_core:1097 cuFile initialization failed
+ 08-10-2025 10:14:51:742 [pid=48878 tid=48878] ERROR  cufio_core:977 cuInit Failed, error CUDA_ERROR_NO_DEVICE
+ 08-10-2025 10:14:51:742 [pid=48878 tid=48878] ERROR  cufio_core:1097 cuFile initialization failed
+ 08-10-2025 10:16:00:380 [pid=60809 tid=60809] ERROR  cufio_core:977 cuInit Failed, error CUDA_ERROR_NO_DEVICE
+ 08-10-2025 10:16:00:381 [pid=60809 tid=60809] ERROR  cufio_core:1097 cuFile initialization failed
+ 08-10-2025 10:17:23:532 [pid=74589 tid=74589] ERROR  cufio_core:977 cuInit Failed, error CUDA_ERROR_NO_DEVICE
+ 08-10-2025 10:17:23:533 [pid=74589 tid=74589] ERROR  cufio_core:1097 cuFile initialization failed
+ 08-10-2025 10:26:55:678 [pid=43652 tid=43652] ERROR  cufio_core:977 cuInit Failed, error CUDA_ERROR_NO_DEVICE
+ 08-10-2025 10:26:55:679 [pid=43652 tid=43652] ERROR  cufio_core:1097 cuFile initialization failed
+ 08-10-2025 10:30:14:295 [pid=109221 tid=109221] ERROR  cufio_core:977 cuInit Failed, error CUDA_ERROR_NO_DEVICE
+ 08-10-2025 10:30:14:295 [pid=109221 tid=109221] ERROR  cufio_core:1097 cuFile initialization failed
+ 08-10-2025 10:30:53:774 [pid=117959 tid=117959] ERROR  cufio_core:977 cuInit Failed, error CUDA_ERROR_NO_DEVICE
+ 08-10-2025 10:30:53:774 [pid=117959 tid=117959] ERROR  cufio_core:1097 cuFile initialization failed
+ 08-10-2025 10:31:44:741 [pid=128847 tid=128847] ERROR  cufio_core:977 cuInit Failed, error CUDA_ERROR_NO_DEVICE
+ 08-10-2025 10:31:44:741 [pid=128847 tid=128847] ERROR  cufio_core:1097 cuFile initialization failed
+ 08-10-2025 10:35:54:41 [pid=97864 tid=97864] ERROR  cufio_core:977 cuInit Failed, error CUDA_ERROR_NO_DEVICE
+ 08-10-2025 10:35:54:41 [pid=97864 tid=97864] ERROR  cufio_core:1097 cuFile initialization failed
+ 08-10-2025 10:36:47:894 [pid=115585 tid=115585] ERROR  cufio_core:977 cuInit Failed, error CUDA_ERROR_NO_DEVICE
+ 08-10-2025 10:36:47:894 [pid=115585 tid=115585] ERROR  cufio_core:1097 cuFile initialization failed
