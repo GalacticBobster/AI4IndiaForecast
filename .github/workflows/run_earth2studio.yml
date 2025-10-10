@@ -5,9 +5,9 @@ on:
     branches:
       - main
   schedule:
-    # Runs every day at 4pm EST (21:00 UTC)
     - cron: "0 */6 * * *"
-  workflow_dispatch: # allows manual trigger
+  workflow_dispatch: {}
+
 
 
 permissions:
