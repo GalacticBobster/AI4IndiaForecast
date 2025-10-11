@@ -23,14 +23,14 @@ def round_to_gfs(dt):
 
 def main():
     nsteps = 10
-    current_time = datetime(2022, 1, 1, 18) #datetime.utcnow()
-    gfs_time = current_time #round_to_gfs(current_time)
+    current_time = datetime.utcnow()
+    gfs_time = round_to_gfs(current_time)
     print(f"Running inference for {gfs_time}")
     package = DLWP.load_default_package()
     model = DLWP.load_model(package)
   
     # Create the data source
-    gfs = ARCO()
+    gfs = GFS()
     variable = "t2m"
     # Create the IO handler, store in memory
     io = ZarrBackend()
@@ -76,7 +76,7 @@ def main():
 
     output_dir = "../docs/outputs"
     os.makedirs(output_dir, exist_ok=True)
-    plt.savefig(os.path.join(output_dir, "t2m_forecast_ERA5.png"))
+    plt.savefig(os.path.join(output_dir, "t2m_forecast.png"))
     
     variable = "tcwv"
     fig2, ax2 = plt.subplots(
@@ -117,7 +117,7 @@ def main():
     cbar = fig2.colorbar(cbar, ax=ax2[-1], orientation="vertical",  shrink=0.8)
     output_dir = "../docs/outputs"
     os.makedirs(output_dir, exist_ok=True)
-    plt.savefig(os.path.join(output_dir, "tcwv_forecast_ERA5.png"))
+    plt.savefig(os.path.join(output_dir, "tcwv_forecast.png"))
 
 
 if __name__ == "__main__":
