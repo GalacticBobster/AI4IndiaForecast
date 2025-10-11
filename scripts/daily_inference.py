@@ -74,7 +74,8 @@ def main():
     cbar.set_clim(-10.0, 40)
     cbar = fig.colorbar(cbar, ax=ax[-1], orientation="vertical", label="$^{o}$C", shrink=0.8)
 
-    output_dir = "../docs/outputs"
+    repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+    output_dir = os.path.join(repo_root, "docs", "outputs")
     os.makedirs(output_dir, exist_ok=True)
     plt.savefig(os.path.join(output_dir, "t2m_forecast.png"))
     
@@ -115,7 +116,8 @@ def main():
     cbar.set_array(io[variable][0, 0])
     #cbar.set_clim(-10.0, 30)
     cbar = fig2.colorbar(cbar, ax=ax2[-1], orientation="vertical",  shrink=0.8)
-    output_dir = "../docs/outputs"
+    repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+    output_dir = os.path.join(repo_root, "docs", "outputs")
     os.makedirs(output_dir, exist_ok=True)
     plt.savefig(os.path.join(output_dir, "tcwv_forecast.png"))
 
