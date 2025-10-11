@@ -12,6 +12,8 @@ on:
 
 permissions:
   contents: write  # allow workflow to push changes
+  pages: write
+
 
 jobs:
   run-inference:
