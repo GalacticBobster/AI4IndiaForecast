@@ -33,6 +33,11 @@ jobs:
           pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Clean previous outputs
+        run: |
+          rm -f docs/outputs/*
+          mkdir -p docs/outputs
+
       - name: Run daily Earth2Studio script
         env:
           NOAA_KEY: ${{ secrets.NOAA_KEY }}
@@ -45,13 +50,15 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           mkdir -p docs/outputs/   # make sure folder exists
-          if compgen -G "docs/outputs/*" > /dev/null; then
-            git add docs/outputs/*
-            git diff --quiet || git commit -m "Update daily forecast"
+          git add -A docs/outputs/
+          if ! git diff --cached --quiet; then
+            git commit -m "Update daily forecast"
             git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
           else
             echo "No files to commit"
           fi
+      - name: Wait for commit propagation
+        run: sleep 10
 
       - name: Trigger GitHub Pages rebuild
         run: |
