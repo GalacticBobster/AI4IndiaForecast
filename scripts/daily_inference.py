@@ -145,7 +145,7 @@ def main():
     plt.suptitle(f"6 hr Precipitation (ForeCastNet) - {gfs_time}")
 
     cbar = plt.cm.ScalarMappable(cmap="Spectral_r")
-    cbar.set_array(io[variable][0, 0])
+    cbar.set_array(io[variable][0, 0]*1e3)
     #cbar.set_clim(-10.0, 30)
     cbar = fig2.colorbar(cbar, ax=ax2[-1], orientation="vertical",  label="mm", shrink=0.8)
     repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
