@@ -8,6 +8,8 @@ from earth2studio.data import GFS
 from earth2studio.data import ARCO
 from earth2studio.models.px import DLWP
 from earth2studio.io import ZarrBackend
+from earth2studio.models.dx import PrecipitationAFNO
+from earth2studio.models.px import FCN
 import earth2studio.run as run
 import cartopy.crs as ccrs
 import matplotlib.pyplot as plt
@@ -49,16 +51,19 @@ def main():
     current_time = datetime.utcnow()
     gfs_time = get_last_available_gfs_time(current_time)
     print(f"Running inference for {gfs_time}")
-    package = DLWP.load_default_package()
-    model = DLWP.load_model(package)
-  
+    package = FCN.load_default_package()
+    model = FCN.load_model(package)
+ 
+    package = PrecipitationAFNO.load_default_package()
+    diagnostic_model = PrecipitationAFNO.load_model(package)
     # Create the data source
     gfs = GFS()
     variable = "t2m"
     # Create the IO handler, store in memory
     io = ZarrBackend()
     # Example Earth2Studio workflow
-    io = run.deterministic([gfs_time], nsteps, model, gfs, io)
+    #io2 = run.deterministic([gfs_time], nsteps, model, gfs, io)
+    io = run.diagnostic([gfs_time], nsteps, model, diagnostic_model, gfs, io)
     # Create a figure and axes with the specified projection
     fig, ax = plt.subplots(
     1,
@@ -69,16 +74,16 @@ def main():
     )
     vmin = np.nanmin(io[variable]) - 273.15
     vmax = np.nanmax(io[variable]) - 273.15
-    times = (io["lead_time"][:].astype("timedelta64[ns]").astype("timedelta64[h]").astype(int))
-    z = zarr.open(io.store, mode="r")
+    times = (io2["lead_time"][:].astype("timedelta64[ns]").astype("timedelta64[h]").astype(int))
+    z = zarr.open(io2.store, mode="r")
     print(z.tree())
 
     step = 2  # 24hrs
     for i, t in enumerate(range(0, 10, step)):
       ctr = ax[i].contourf(
-        io["lon"][:],
-        io["lat"][:],
-        io[variable][0, t] - 273.15,
+        io2["lon"][:],
+        io2["lat"][:],
+        io2[variable][0, t] - 273.15,
         vmin=-10,
         vmax=40,
         transform=ccrs.PlateCarree(),
@@ -119,9 +124,9 @@ def main():
     step = 2  # 24hrs
     for i, t in enumerate(range(0, 10, step)):
       ctr = ax2[i].contourf(
-        io["lon"][:],
-        io["lat"][:],
-        io[variable][0, t],
+        io2["lon"][:],
+        io2["lat"][:],
+        io2[variable][0, t],
         vmin=vmin,
         vmax=vmax,
         transform=ccrs.PlateCarree(),

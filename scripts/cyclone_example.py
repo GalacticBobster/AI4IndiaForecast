@@ -30,7 +30,8 @@ start_time = datetime(2009, 8, 5)  # Start date for inference
 
 from earth2studio.data import fetch_data, prep_data_array
 
-device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+#device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+device = torch.device("cpu") 
 tracker = tracker.to(device)
 
 # Land fall occured August 25th 2017
@@ -40,6 +41,7 @@ for step, time in enumerate(times):
     x, coords = prep_data_array(da, device=device)
     output, output_coords = tracker(x, coords)
     print(f"Step {step}: ARCO tracks output shape {output.shape}")
+    torch.save(output.cpu(), f"outputs/era5_step_{step}.pt")
 
 era5_tracks = output.cpu()
 torch.save(era5_tracks, "outputs/13_era5_paths.pt")
