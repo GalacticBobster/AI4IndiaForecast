@@ -133,8 +133,6 @@ def main():
         io["lon"][:],
         io["lat"][:],
         io[variable][0, t]*1e3,
-        vmin=0.00,
-        vmax=100,
         transform=ccrs.PlateCarree(),
         levels=20,
         cmap="Spectral_r",
