@@ -8,6 +8,8 @@ from earth2studio.data import GFS
 from earth2studio.data import ARCO
 from earth2studio.models.px import DLWP
 from earth2studio.io import ZarrBackend
+from earth2studio.models.dx import PrecipitationAFNO
+from earth2studio.models.px import FCN
 import earth2studio.run as run
 import cartopy.crs as ccrs
 import matplotlib.pyplot as plt
@@ -83,14 +85,14 @@ def main():
         vmax=40,
         transform=ccrs.PlateCarree(),
         levels=20,
-        cmap="coolwarm",
+        cmap="Spectral_r",
       )
       ax[i].set_title(f"{times[t]}hrs")
       ax[i].coastlines()
       ax[i].gridlines()
       ax[i].set_extent([65, 100, 5, 40], crs=ccrs.PlateCarree())
 
-    plt.suptitle(f"Surface Air Temperature - {gfs_time}")
+    plt.suptitle(f"Surface Air Temperature (DLWP) - {gfs_time}")
 
     cbar = plt.cm.ScalarMappable(cmap="Spectral_r")
     cbar.set_array(io[variable][0, 0] - 273.15)
@@ -102,7 +104,16 @@ def main():
     os.makedirs(output_dir, exist_ok=True)
     plt.savefig(os.path.join(output_dir, "t2m_forecast.png"))
     
-    variable = "tcwv"
+    package = FCN.load_default_package()
+    model = FCN.load_model(package)
+
+    package = PrecipitationAFNO.load_default_package()
+    diagnostic_model = PrecipitationAFNO.load_model(package)
+    
+    io = ZarrBackend()
+    io = run.diagnostic([gfs_time], nsteps, model, diagnostic_model, gfs, io)
+
+    variable = "tp"
     fig2, ax2 = plt.subplots(
     1,
     5,
@@ -121,9 +132,9 @@ def main():
       ctr = ax2[i].contourf(
         io["lon"][:],
         io["lat"][:],
-        io[variable][0, t],
-        vmin=vmin,
-        vmax=vmax,
+        io[variable][0, t]*1e3,
+        vmin=0.00,
+        vmax=100,
         transform=ccrs.PlateCarree(),
         levels=20,
         cmap="Spectral_r",
@@ -133,12 +144,12 @@ def main():
       ax2[i].gridlines()
       ax2[i].set_extent([65, 100, 5, 40], crs=ccrs.PlateCarree())
 
-    plt.suptitle(f"Total Column Water Vapor - {gfs_time}")
+    plt.suptitle(f"6 hr Precipitation (ForeCastNet) - {gfs_time}")
 
     cbar = plt.cm.ScalarMappable(cmap="Spectral_r")
     cbar.set_array(io[variable][0, 0])
     #cbar.set_clim(-10.0, 30)
-    cbar = fig2.colorbar(cbar, ax=ax2[-1], orientation="vertical",  shrink=0.8)
+    cbar = fig2.colorbar(cbar, ax=ax2[-1], orientation="vertical",  label="mm", shrink=0.8)
     repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
     output_dir = os.path.join(repo_root, "docs", "outputs")
     os.makedirs(output_dir, exist_ok=True)
