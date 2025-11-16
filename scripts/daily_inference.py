@@ -129,7 +129,7 @@ def main():
     print(z.tree())
     
     #custom color maps
-    bounds = [-1e6, 0.1, 2.5, 10, 20, 40, 70, 130, 200, 1e9]
+    bounds = [0.1, 2.5, 10, 20, 40, 70, 130, 200]
     # One more color than bounds → 9 colors for 8 bins + <0.1
     colors = [
      "#FFFFFF",  # <0.1 white
@@ -142,6 +142,7 @@ def main():
      "#FF4500",  # 130–200 orange-red
      "#FF0000",  # >200 red
       ] 
+    levels = [-1e6, 0.1, 2.5, 10, 20, 40, 70, 130, 200, 1e9]
 
     # Build discrete colormap
     cmap_r = mcolors.ListedColormap(colors)
@@ -156,7 +157,7 @@ def main():
         io["lat"][:],
         io[variable][0, t]*1e3,
         transform=ccrs.PlateCarree(),
-        levels=bounds,
+        levels=levels,
         cmap=cmap_r,
         norm=norm_r
       )
