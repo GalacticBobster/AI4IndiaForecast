@@ -148,7 +148,7 @@ def main():
     cmap_r = mcolors.ListedColormap(colors)
 
     # Build normalization: below first bound = white
-    norm_r = mcolors.BoundaryNorm([0] + bounds + [1e9], ncolors=cmap.N)
+    norm_r = mcolors.BoundaryNorm([0] + bounds + [1e9], ncolors=cmap_r.N)
 
     step = 2  # 24hrs
     for i, t in enumerate(range(0, 10, step)):
