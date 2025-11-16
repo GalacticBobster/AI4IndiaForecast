@@ -10,6 +10,7 @@ from earth2studio.models.px import DLWP
 from earth2studio.io import ZarrBackend
 from earth2studio.models.dx import PrecipitationAFNO
 from earth2studio.models.px import FCN
+import matplotlib.colors as mcolors
 import earth2studio.run as run
 import cartopy.crs as ccrs
 import matplotlib.pyplot as plt
@@ -126,6 +127,28 @@ def main():
     times = (io["lead_time"][:].astype("timedelta64[ns]").astype("timedelta64[h]").astype(int))
     z = zarr.open(io.store, mode="r")
     print(z.tree())
+    
+    #custom color maps
+    bounds = [0.1, 2.5, 10, 20, 40, 70, 130, 200]
+
+    # One more color than bounds → 9 colors for 8 bins + <0.1
+    colors = [
+     "#FFFFFF",  # <0.1 white
+     "#98FB98",  # 0.1–2.5 light green
+     "#32CD32",  # 2.5–10 green
+     "#87CEEB",  # 10–20 light blue
+     "#0000FF",  # 20–40 blue
+     "#00008B",  # 40–70 deep blue
+     "#FFA500",  # 70–130 orange
+     "#FF4500",  # 130–200 orange-red
+     "#FF0000",  # >200 red
+      ] 
+
+    # Build discrete colormap
+    cmap_r = mcolors.ListedColormap(colors)
+
+    # Build normalization: below first bound = white
+    norm_r = mcolors.BoundaryNorm([0] + bounds + [1e9], ncolors=cmap.N)
 
     step = 2  # 24hrs
     for i, t in enumerate(range(0, 10, step)):
@@ -135,7 +158,8 @@ def main():
         io[variable][0, t]*1e3,
         transform=ccrs.PlateCarree(),
         levels=20,
-        cmap="Spectral_r",
+        cmap=cmap_r,
+        norm=norm_r
       )
       ax2[i].set_title(f"{times[t]}hrs")
       ax2[i].coastlines()
@@ -147,7 +171,9 @@ def main():
     cbar = plt.cm.ScalarMappable(cmap="Spectral_r")
     cbar.set_array(io[variable][0, 0]*1e3)
     #cbar.set_clim(-10.0, 30)
-    cbar = fig2.colorbar(cbar, ax=ax2[-1], orientation="vertical",  label="mm", shrink=0.8)
+    #cbar = fig2.colorbar(cbar, ax=ax2[-1], orientation="vertical",  label="mm", shrink=0.8)
+    cbar = fig2.colorbar(ctr,ax=ax2[-1],orientation="vertical",shrink=0.8,label="mm",ticks=bounds)
+    cbar.ax.set_yticklabels([str(b) for b in bounds])
     repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
     output_dir = os.path.join(repo_root, "docs", "outputs")
     os.makedirs(output_dir, exist_ok=True)
