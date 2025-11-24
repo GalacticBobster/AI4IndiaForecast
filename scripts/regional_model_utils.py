@@ -164,6 +164,11 @@ def subset_tensor_to_region(
     """
     Subset global tensor data to regional domain.
     
+    Note: This is a simplified implementation that assumes specific tensor dimensions.
+    For production use, this should be extended to handle arbitrary tensor shapes
+    and dimension orders. The current implementation works for tensors where lat/lon
+    are the last two dimensions or can be easily identified.
+    
     Args:
         tensor: Global data tensor
         coords: Coordinate dictionary
@@ -192,9 +197,7 @@ def subset_tensor_to_region(
     lat_dim = dims.index(lat_name)
     lon_dim = dims.index(lon_name)
     
-    # Subset tensor
-    # This is a simplified version - actual implementation would need to handle
-    # different tensor shapes and dimension orders
+    # Subset tensor along lat and lon dimensions
     subset_tensor = tensor.index_select(lat_dim, lat_indices)
     subset_tensor = subset_tensor.index_select(lon_dim, lon_indices)
     

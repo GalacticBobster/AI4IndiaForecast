@@ -6,38 +6,38 @@ from datetime import datetime, timedelta
 from typing import Optional
 
 
-def round_to_6h(dt: datetime) -> datetime:
+def round_to_6h(reference_time: datetime) -> datetime:
     """
     Round datetime to nearest past 6-hour cycle.
     
     Args:
-        dt: Datetime to round
+        reference_time: Datetime to round
     
     Returns:
         Rounded datetime
     """
-    hour = (dt.hour // 6) * 6
-    rounded = dt.replace(hour=hour, minute=0, second=0, microsecond=0)
-    if rounded > dt:
+    hour = (reference_time.hour // 6) * 6
+    rounded = reference_time.replace(hour=hour, minute=0, second=0, microsecond=0)
+    if rounded > reference_time:
         rounded -= timedelta(hours=6)
     return rounded
 
 
-def get_last_available_time(dt: Optional[datetime] = None, source: str = "GFS") -> datetime:
+def get_last_available_time(reference_time: Optional[datetime] = None, source: str = "GFS") -> datetime:
     """
     Return a datetime that is guaranteed to exist for the specified data source.
     
     Args:
-        dt: Reference datetime (default: current UTC time)
+        reference_time: Reference datetime (default: current UTC time)
         source: Data source type ("GFS" or "ERA5")
     
     Returns:
         Available datetime for the data source
     """
-    if dt is None:
-        dt = datetime.utcnow()
+    if reference_time is None:
+        reference_time = datetime.utcnow()
     
-    rounded_time = round_to_6h(dt)
+    rounded_time = round_to_6h(reference_time)
     
     if source.upper() == "GFS":
         # GFS typically has 6-12 hour delay

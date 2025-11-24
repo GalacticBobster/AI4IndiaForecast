@@ -134,39 +134,41 @@ def test_cyclone_list_loading():
     """Test loading cyclone list from JSON."""
     print("Testing cyclone list loading...")
     
-    # Create test cyclone list
-    test_file = '/tmp/test_cyclones.json'
-    cyclones = [
-        {'name': 'Test 1', 'lat': 15.0, 'lon': 90.0},
-        {'name': 'Test 2', 'lat': 18.0, 'lon': 70.0}
-    ]
+    import tempfile
     
-    with open(test_file, 'w') as f:
+    # Create test cyclone list
+    with tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False) as f:
+        test_file = f.name
+        cyclones = [
+            {'name': 'Test 1', 'lat': 15.0, 'lon': 90.0},
+            {'name': 'Test 2', 'lat': 18.0, 'lon': 70.0}
+        ]
         json.dump(cyclones, f)
     
-    # Load and verify
-    with open(test_file, 'r') as f:
-        loaded = json.load(f)
-    
-    assert len(loaded) == 2
-    assert loaded[0]['name'] == 'Test 1'
-    assert loaded[0]['lat'] == 15.0
-    assert loaded[1]['lon'] == 70.0
-    print("  ✓ Cyclone list JSON I/O")
-    
-    # Test with regional filter
-    from regional_model_utils import RegionalModelConfig
-    region = RegionalModelConfig('north_indian_ocean')
-    
-    regional_cyclones = [
-        c for c in loaded
-        if region.contains_point(c['lat'], c['lon'])
-    ]
-    assert len(regional_cyclones) == 2  # Both should be in North Indian Ocean
-    print("  ✓ Regional filtering")
-    
-    # Cleanup
-    os.remove(test_file)
+    try:
+        # Load and verify
+        with open(test_file, 'r') as f:
+            loaded = json.load(f)
+        
+        assert len(loaded) == 2
+        assert loaded[0]['name'] == 'Test 1'
+        assert loaded[0]['lat'] == 15.0
+        assert loaded[1]['lon'] == 70.0
+        print("  ✓ Cyclone list JSON I/O")
+        
+        # Test with regional filter
+        from regional_model_utils import RegionalModelConfig
+        region = RegionalModelConfig('north_indian_ocean')
+        
+        regional_cyclones = [
+            c for c in loaded
+            if region.contains_point(c['lat'], c['lon'])
+        ]
+        assert len(regional_cyclones) == 2  # Both should be in North Indian Ocean
+        print("  ✓ Regional filtering")
+    finally:
+        # Cleanup
+        os.remove(test_file)
     
     print("✅ Cyclone list loading tests passed!\n")
 
