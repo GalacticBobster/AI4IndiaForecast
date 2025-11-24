@@ -83,10 +83,9 @@ def test_cyclone_tracker_imports():
     try:
         from tc_tracker_india import (
             TropicalCycloneTracker,
-            round_to_6h,
-            get_last_available_time,
             INDIAN_OCEAN_REGION
         )
+        from cyclone_utils import round_to_6h, get_last_available_time
         
         # Test utility functions
         dt = datetime(2024, 1, 15, 7, 30, 0)
@@ -114,11 +113,8 @@ def test_regional_cyclone_eval_imports():
     print("Testing regional_cyclone_eval imports...")
     
     try:
-        from regional_cyclone_eval import (
-            RegionalCycloneForecaster,
-            round_to_6h,
-            get_last_available_time
-        )
+        from regional_cyclone_eval import RegionalCycloneForecaster
+        from cyclone_utils import round_to_6h, get_last_available_time
         
         # Test utility functions
         dt = datetime(2024, 1, 15, 14, 45, 0)

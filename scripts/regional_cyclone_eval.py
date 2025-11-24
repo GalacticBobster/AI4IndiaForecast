@@ -21,17 +21,16 @@ from tqdm import tqdm
 from earth2studio.data import GFS, ARCO
 from earth2studio.models.dx import TCTrackerWuDuan
 from earth2studio.models.px import SFNO, DLWP, FCN
-from earth2studio.io import ZarrBackend
-from earth2studio.data import fetch_data, prep_data_array
+from earth2studio.data import fetch_data
 from earth2studio.utils.time import to_time_array
 from earth2studio.utils.coords import map_coords
-import earth2studio.run as run
 
 from regional_model_utils import (
     RegionalModelConfig,
     get_regional_grid_info,
     REGIONAL_DOMAINS
 )
+from cyclone_utils import round_to_6h, get_last_available_time
 
 
 class RegionalCycloneForecaster:
@@ -355,26 +354,6 @@ class RegionalCycloneForecaster:
         plt.savefig(save_path, dpi=150, bbox_inches='tight')
         print(f"\nVisualization saved to {save_path}")
         plt.close()
-
-
-def round_to_6h(dt: datetime) -> datetime:
-    """Round datetime to nearest past 6-hour cycle."""
-    hour = (dt.hour // 6) * 6
-    rounded = dt.replace(hour=hour, minute=0, second=0, microsecond=0)
-    if rounded > dt:
-        rounded -= timedelta(hours=6)
-    return rounded
-
-
-def get_last_available_time(source: str = "GFS") -> datetime:
-    """Get last available time for data source."""
-    now = datetime.utcnow()
-    rounded = round_to_6h(now)
-    
-    if source.upper() == "GFS":
-        return rounded - timedelta(hours=12)
-    else:  # ERA5
-        return rounded - timedelta(days=5)
 
 
 def main():
