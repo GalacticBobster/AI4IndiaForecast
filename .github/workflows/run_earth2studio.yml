@@ -37,7 +37,9 @@ jobs:
         run: |
           rm -f docs/outputs/*
           mkdir -p docs/outputs
-          wget -O docs/outputs/BFS_rain.gif "https://nwp.imd.gov.in/gfs_ar/00/24hGFS1534rain.gif"
+          curl -fL --retry 5 --retry-delay 5 \
+               -o docs/outputs/BFS_rain.gif \
+               "https://nwp.imd.gov.in/gfs_ar/00/24hGFS1534rain.gif"
 
       - name: Run daily Earth2Studio script
         env:
