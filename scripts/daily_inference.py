@@ -111,9 +111,12 @@ def main():
     package = PrecipitationAFNO.load_default_package()
     diagnostic_model = PrecipitationAFNO.load_model(package)
     
+    gfs = GFS()
+
     io = ZarrBackend()
     io = run.diagnostic([gfs_time], nsteps, model, diagnostic_model, gfs, io)
-
+    
+     
     variable = "tp"
     fig2, ax2 = plt.subplots(
     1,
