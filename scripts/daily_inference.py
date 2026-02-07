@@ -17,7 +17,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import os
 import zarr
-
+import gc
 
 def round_to_gfs(dt):
     # Round to the nearest past 6-hour GFS cycle
@@ -111,6 +111,9 @@ def main():
     package = PrecipitationAFNO.load_default_package()
     diagnostic_model = PrecipitationAFNO.load_model(package)
     
+    del gfs  # Explicitly delete
+    
+    gc.collect()
     gfs = GFS()
 
     io = ZarrBackend()
