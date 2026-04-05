@@ -8,6 +8,7 @@ from earth2studio.data import GFS
 from earth2studio.data import ARCO
 from earth2studio.models.px import DLWP
 from earth2studio.io import ZarrBackend
+#from earth2studio.models.px import SFNO
 from earth2studio.models.dx import PrecipitationAFNO
 #from earth2studio.models.px import FCN3
 import matplotlib.colors as mcolors
@@ -106,9 +107,9 @@ def main():
     plt.savefig(os.path.join(output_dir, "t2m_forecast.png"))
 
 '''
-    package = FCN3.load_default_package()
+    package = SFNO.load_default_package()
     VAR = ["t2m", "tcwv", "t850", "z500"]
-    model = FCN3.load_model(package, variables=VAR)
+    model = SFNO.load_model(package)
 
     package = PrecipitationAFNO.load_default_package()
     diagnostic_model = PrecipitationAFNO.load_model(package)
@@ -186,7 +187,7 @@ def main():
     output_dir = os.path.join(repo_root, "docs", "outputs")
     os.makedirs(output_dir, exist_ok=True)
     plt.savefig(os.path.join(output_dir, "tcwv_forecast.png"))
-'''
 
+'''
 if __name__ == "__main__":
     main()

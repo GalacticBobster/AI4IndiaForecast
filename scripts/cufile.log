@@ -16,3 +16,5 @@
  05-04-2026 12:59:50:453 [pid=68349 tid=68349] NOTICE  cufio-drv:830 running in compatible mode
  05-04-2026 13:06:07:222 [pid=124697 tid=124697] WARN   0:169 failed to open /proc/driver/nvidia-fs/devcount  error: No such file or directory
  05-04-2026 13:06:07:228 [pid=124697 tid=124697] NOTICE  cufio-drv:830 running in compatible mode
+ 05-04-2026 13:31:34:715 [pid=102971 tid=102971] WARN   0:169 failed to open /proc/driver/nvidia-fs/devcount  error: No such file or directory
+ 05-04-2026 13:31:34:738 [pid=102971 tid=102971] NOTICE  cufio-drv:830 running in compatible mode
