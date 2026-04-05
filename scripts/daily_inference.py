@@ -9,7 +9,7 @@ from earth2studio.data import ARCO
 from earth2studio.models.px import DLWP
 from earth2studio.io import ZarrBackend
 from earth2studio.models.dx import PrecipitationAFNO
-from earth2studio.models.px import FCN3
+#from earth2studio.models.px import FCN3
 import matplotlib.colors as mcolors
 import earth2studio.run as run
 import cartopy.crs as ccrs
@@ -104,7 +104,8 @@ def main():
     output_dir = os.path.join(repo_root, "docs", "outputs")
     os.makedirs(output_dir, exist_ok=True)
     plt.savefig(os.path.join(output_dir, "t2m_forecast.png"))
-    
+
+'''
     package = FCN3.load_default_package()
     VAR = ["t2m", "tcwv", "t850", "z500"]
     model = FCN3.load_model(package, variables=VAR)
@@ -185,7 +186,7 @@ def main():
     output_dir = os.path.join(repo_root, "docs", "outputs")
     os.makedirs(output_dir, exist_ok=True)
     plt.savefig(os.path.join(output_dir, "tcwv_forecast.png"))
-
+'''
 
 if __name__ == "__main__":
     main()
