@@ -1,16 +1,11 @@
 from dotenv import load_dotenv
 
 load_dotenv()
-
-
 from datetime import datetime, timedelta
 from earth2studio.data import GFS
 from earth2studio.data import ARCO
 from earth2studio.models.px import DLWP
 from earth2studio.io import ZarrBackend
-#from earth2studio.models.px import SFNO
-from earth2studio.models.dx import PrecipitationAFNO
-#from earth2studio.models.px import FCN3
 import matplotlib.colors as mcolors
 import earth2studio.run as run
 import cartopy.crs as ccrs
