@@ -2,3 +2,17 @@
  14-11-2025 18:30:39:227 [pid=84515 tid=84515] NOTICE  cufio-drv:830 running in compatible mode
  16-11-2025 16:03:56:141 [pid=31456 tid=31456] ERROR  cufio_core:977 cuInit Failed, error CUDA_ERROR_NO_DEVICE
  16-11-2025 16:03:56:157 [pid=31456 tid=31456] ERROR  cufio_core:1097 cuFile initialization failed
+ 05-04-2026 12:26:36:399 [pid=15444 tid=15444] ERROR  cufio_core:977 cuInit Failed, error CUDA_ERROR_NO_DEVICE
+ 05-04-2026 12:26:36:419 [pid=15444 tid=15444] ERROR  cufio_core:1097 cuFile initialization failed
+ 05-04-2026 12:32:17:21 [pid=54736 tid=54736] ERROR  cufio_core:977 cuInit Failed, error CUDA_ERROR_NO_DEVICE
+ 05-04-2026 12:32:17:34 [pid=54736 tid=54736] ERROR  cufio_core:1097 cuFile initialization failed
+ 05-04-2026 12:47:58:311 [pid=72708 tid=72708] WARN   0:169 failed to open /proc/driver/nvidia-fs/devcount  error: No such file or directory
+ 05-04-2026 12:47:58:328 [pid=72708 tid=72708] NOTICE  cufio-drv:830 running in compatible mode
+ 05-04-2026 12:50:51:621 [pid=114227 tid=114227] WARN   0:169 failed to open /proc/driver/nvidia-fs/devcount  error: No such file or directory
+ 05-04-2026 12:50:51:622 [pid=114227 tid=114227] NOTICE  cufio-drv:830 running in compatible mode
+ 05-04-2026 12:53:18:692 [pid=7733 tid=7733] WARN   0:169 failed to open /proc/driver/nvidia-fs/devcount  error: No such file or directory
+ 05-04-2026 12:53:18:693 [pid=7733 tid=7733] NOTICE  cufio-drv:830 running in compatible mode
+ 05-04-2026 12:59:50:452 [pid=68349 tid=68349] WARN   0:169 failed to open /proc/driver/nvidia-fs/devcount  error: No such file or directory
+ 05-04-2026 12:59:50:453 [pid=68349 tid=68349] NOTICE  cufio-drv:830 running in compatible mode
+ 05-04-2026 13:06:07:222 [pid=124697 tid=124697] WARN   0:169 failed to open /proc/driver/nvidia-fs/devcount  error: No such file or directory
+ 05-04-2026 13:06:07:228 [pid=124697 tid=124697] NOTICE  cufio-drv:830 running in compatible mode
