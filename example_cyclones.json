@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Test Cyclone Bay of Bengal",
+    "lat": 15.0,
+    "lon": 90.0
+  },
+  {
+    "name": "Test Cyclone Arabian Sea",
+    "lat": 18.0,
+    "lon": 70.0
+  },
+  {
+    "name": "Test Cyclone Outside Region",
+    "lat": 35.0,
+    "lon": 110.0
+  }
+]
